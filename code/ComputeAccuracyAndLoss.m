@@ -7,7 +7,7 @@ function [accuracy, loss] = ComputeAccuracyAndLoss(W, b, data, labels)
 
 output_cells = num2cell(output',1);
 label_cells = num2cell(labels',1);
-loss = cellfun(@(x,y) sum(bsxfun(@(m,n) -log(m.*n), x,y)), output_cells, label_cells);
+loss = cellfun(@(x,y) -log(bsxfun(@(m,n) sum(m.*n), x,y)), output_cells, label_cells);
 loss = sum(loss)/length(data);
 
 accuracy = cellfun(@(x,y) find(x==max(x))==find(y==max(y)), output_cells, label_cells);
