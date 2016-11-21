@@ -5,7 +5,7 @@ function [grad_W, grad_b] = Backward(W, b, X, Y, act_h, act_a)
 %   - 'W' and 'b' the network parameters
 %   - 'X' and 'Y' the single input data sample and ground truth output vector,
 %     of sizes Nx1 and Cx1 respectively
-%   - 'act_h' and 'act_a' the network layer pre and post activations when forward
+%   - 'act_a' and 'act_h' the network layer pre and post activations when forward
 %     forward propogating the input smaple 'X'
 
 grad_W = cell(length(act_h)-1,1); 
