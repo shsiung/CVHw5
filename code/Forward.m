@@ -6,18 +6,20 @@ function [output, act_h, act_a] = Forward(W, b, X)
 % as well as the hidden layer pre activations in 'act_a', and the hidden layer post
 % activations in 'act_h'.
 layer_n = length(W);
-act_a = cell(layer_n,1);
-act_h = cell(layer_n,1);
+act_h = cell(layer_n+1,1);
+act_a = cell(layer_n+1,1);
+act_h(1) = mat2cell(X,size(X,1));
+act_a(1) = mat2cell(X,size(X,1));
 curr_input = X;
 sigmoid = @(x) 1/(1+exp(-x));
-for i = 1 : length(W)
-    curr_act = cell2mat(W(i))*curr_input+cell2mat(b(i));
-    act_h(i) = num2cell(curr_act,1);
+for i = 2 : layer_n+1
+    curr_act = W{i-1}*curr_input+b{i-1};
+    act_a(i) = num2cell(curr_act,1);
     curr_input = arrayfun(sigmoid, curr_act);
-    act_a(i) = num2cell(curr_input,1);
+    act_h(i) = num2cell(curr_input,1);
 end
 softmax = @(x) exp(x);
-act_a(end) = num2cell(arrayfun(softmax,curr_act),1);
-act_a(end) = num2cell(cell2mat(act_a(end))/sum(cell2mat(act_a(end))),1);
-output = act_a(end);
+act_h(end) = num2cell(arrayfun(softmax,curr_act),1);
+act_h(end) = num2cell(act_h{end}/sum(act_h{end}),1);
+output = act_h(end);
 end
