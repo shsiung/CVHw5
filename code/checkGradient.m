@@ -29,9 +29,7 @@ function [] = checkGradient(layer)
     [grad_W, ~] = Backward(W, b, data, labels, act_h, act_a);
 
     W_anal = grad_W{layer};
-    show_limit = 20;
     
-    iter = 0;
     epsilon = 1e-4;
     for i = 1: layers(layer) * layers(layer+1)
         Wp = W;
@@ -47,11 +45,6 @@ function [] = checkGradient(layer)
         grad_anal = W_anal(i);
 
         fprintf('Analytic: %.5f, Numeric: %.5f Diff: %.7f\n',grad_anal, grad_num, abs(grad_anal-grad_num));
-
-        iter = iter + 1;
-        if iter > show_limit
-            break;
-        end
     end
 end
 
