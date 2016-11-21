@@ -38,13 +38,13 @@ for j = 1:num_epoch
     plt_valid_loss(j) = valid_loss;
 end
 subplot(1,2,1)
-plot(1:30,plt_train_acc,'LineWidth',1.5);
+plot(1:num_epoch,plt_train_acc,'LineWidth',1.5);
 hold on;
-plot(1:30,plt_valid_acc,'LineWidth',1.5);
+plot(1:num_epoch,plt_valid_acc,'LineWidth',1.5);
 
 subplot(1,2,2)
-plot(1:30,plt_train_loss,'LineWidth',1.5);
+plot(1:num_epoch,plt_train_loss,'LineWidth',1.5);
 hold on;
-plot(1:30,plt_valid_loss,'LineWidth',1.5);
+plot(1:num_epoch,plt_valid_loss,'LineWidth',1.5);
 
 save('nist36_model.mat', 'W', 'b')
