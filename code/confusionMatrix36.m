@@ -5,7 +5,6 @@ layers = [32*32, 800, classes];
 load('../data/nist36_test.mat', 'test_data', 'test_labels')
 load('nist36_model.mat','W','b');
 
-test_data = normalize(test_data);
 [outputs] = Classify(W, b, test_data);
 
 test_labels =  mat2cell(test_labels,ones(1,size(test_labels,1)),size(test_labels,2));

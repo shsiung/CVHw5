@@ -1,4 +1,4 @@
-num_epoch = 5;
+num_epoch = 20;
 classes = 36;
 layers = [32*32, 800, classes];
 learning_rate = 0.01;
@@ -18,10 +18,18 @@ train_data = train_data(I, :);
 train_labels = train_labels(I, :);
 
 % Normalize Data
-train_data = normalize(train_data);
-test_data = normalize(test_data);
-valid_data = normalize(valid_data);
+% train_data = normalize(train_data);
+% test_data = normalize(test_data);
+% valid_data = normalize(valid_data);
 
+
+% test_data = normalize(test_data);
+for i = 1 : length(train_data)
+    data_train = train_data(i,:);
+    data_train(data_train<0.8) = 0;
+    data_train(data_train>0) = 1;
+    train_data(i,:) = data_train;
+end
 plt_train_acc = zeros(num_epoch,1);
 plt_valid_acc = zeros(num_epoch,1);
 plt_train_loss = zeros(num_epoch,1);
@@ -47,4 +55,6 @@ plot(1:num_epoch,plt_train_loss,'LineWidth',1.5);
 hold on;
 plot(1:num_epoch,plt_valid_loss,'LineWidth',1.5);
 
-save('nist36_model.mat', 'W', 'b')
+W = W_new;
+b = b_new;
+save('nist36_model_2.mat', 'W', 'b')

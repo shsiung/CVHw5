@@ -18,8 +18,8 @@ erode_mask = strel('disk',8);
 bw = imerode(bw,erode_mask);
 bw = bwareaopen(bw,20);
 if (PLOT)
-    %imshow(bw.*255);
-    imshow(im);
+    imshow(bw.*255);
+    %imshow(im);
     hold on;
 end
 %% Detect letters
@@ -96,3 +96,12 @@ if (PLOT)
         end
     end
 end
+
+%% Refine final Black&White image
+bw = im(:,:,1)+im(:,:,2)+im(:,:,3);
+bw(bw<thresh) = 0;
+bw(bw>=thresh) = 1;
+erode_mask = strel('disk',1);  
+bw = imerode(bw,erode_mask);
+bw = bwareaopen(bw,20);
+
