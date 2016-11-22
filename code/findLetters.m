@@ -7,18 +7,18 @@ function [lines, bw] = findLetters(im)
 % Each row of the matrix should contain 4 numbers [x1, y1, x2, y2] representing
 % the top-left and bottom-right position of each box. The boxes in one line should
 % be sorted by x1 value.
-PLOT = 0;
+PLOT = 1;
 
 %% Convert to black and white
 bw = im(:,:,1)+im(:,:,2)+im(:,:,3);
 thresh = sum(sum(bw))/(size(im,1)*size(im,2));
 bw(bw<thresh) = 0;
 bw(bw>=thresh) = 1;
-erode_mask = strel('disk',10);  
+erode_mask = strel('disk',8);  
 bw = imerode(bw,erode_mask);
-bw = bwareaopen(bw,10);
+bw = bwareaopen(bw,20);
 if (PLOT)
-    imshow(bw.*255);
+    %imshow(bw.*255);
     imshow(im);
     hold on;
 end
@@ -44,19 +44,22 @@ end
 %% Find lines and positions
 [box_posy, ind] = sort(box_posy);
 dev_y = diff(box_posy);
-line_break = find(dev_y>avg_height);
+line_break = find(dev_y>avg_height-20);
 lines = cell(length(line_break)+1,1);
 last_index = 1;
 
 % Sorting the boxes based on y position (find out # of lines)
 for i = 1 : length(line_break)+1
     if i == length(line_break)+1
-        fprintf('here');
         line = zeros(length(last_index:length(box_posy)),4);
         for j = last_index:length(box_posy)
             box = boxes(ind(j)).BoundingBox;
             line(j-last_index+1,:) = [box(1), box(2), box(1)+box(3), box(2)+box(4)];
+            if (box(3)*box(4) < avg_width/2 * avg_height/2)
+                line(j-last_index+1,:) = [];
+            end
         end
+        line( ~any(line,2), : ) = [];
         lines(i) = mat2cell(line,size(line,1));
         break
     else
@@ -64,28 +67,32 @@ for i = 1 : length(line_break)+1
         for j = last_index:line_break(i)
             box = boxes(ind(j)).BoundingBox;
             line(j-last_index+1,:) = [box(1), box(2), box(1)+box(3), box(2)+box(4)];
+            if (box(3)*box(4) < avg_width/2 * avg_height/2)
+                line(j-last_index+1,:) = [];
+            end
         end
+        line( ~any(line,2), : ) = [];
         lines(i) = mat2cell(line,size(line,1));
     end
     last_index = line_break(i)+1;
 end
 
 % Sorting the x position in each line
-for i = 1 : 
-    
+for i = 1 : length(lines)
+    lines{i} = sortrows(lines{i});
 end
 %% Draw boxes
-for letter = 1:num_letters
-    bb = boxes(letter).BoundingBox; %[x, y, width, height]
-    if (bb(3) < avg_width/2 || bb(4) < avg_height/2)
-        continue;
-    end
-    
-    bco = boxes(letter).Centroid;
-    if (PLOT)
-        rectangle('Position',bb,'EdgeColor','r','LineWidth',2)
-        hold on;
-        plot(bco(1),bco(2),'-m+')
-        drawnow;
+if (PLOT)
+    colors = ['r','g','b','r','g','b','r','g'];
+    for i = 1 : length(lines)
+        for letter = 1:length(lines{i})
+            line = lines{i};
+            line = line(letter,:);
+            bb = [line(1), line(2), line(3)-line(1), line(4)-line(2)];
+            if (PLOT)
+                rectangle('Position',bb,'EdgeColor',colors(i),'LineWidth',2)
+            end
+            hold on;
+        end
     end
 end
