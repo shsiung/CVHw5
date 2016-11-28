@@ -1,7 +1,7 @@
 num_epoch = 30;
 classes = 26;
 layers = [32*32, 400, classes];
-learning_rate = 0.01;
+learning_rate = 0.001;
 
 load('../data/nist26_train.mat', 'train_data', 'train_labels')
 load('../data/nist26_test.mat', 'test_data', 'test_labels')
@@ -44,12 +44,12 @@ subplot(1,2,1)
 plot(1:30,plt_train_acc,'LineWidth',1.5);
 hold on;
 plot(1:30,plt_valid_acc,'LineWidth',1.5);
-%plot(1:30,plt_test_acc,'LineWidth',1.5);
+plot(1:30,plt_test_acc,'LineWidth',1.5);
 
 subplot(1,2,2)
 plot(1:30,plt_train_loss,'LineWidth',1.5);
 hold on;
 plot(1:30,plt_valid_loss,'LineWidth',1.5);
-%plot(1:30,plt_test_loss,'LineWidth',1.5);
+plot(1:30,plt_test_loss,'LineWidth',1.5);
 
-save('nist26_model_2.mat', 'W', 'b')
+save('nist26_model_001.mat', 'W', 'b')
