@@ -142,7 +142,10 @@ From above graphs, we see that the learning rate has sigificantly affect the tra
 learning rate, the faster the training goes, and vice versa. However in my implementation, the traning is too fast such
 that it overfits the training data. We can tell from the increase in loss of validation data after epoch 12 or so, 
 and the 100\% accuracy of training data. Using the parameters of learning rate 0.01, we achieve the accuracy
-of  to test set.
+of  to test set. 
+
+The accuracy from learning rate 0.01 is 82.31\%, and the accuracy from learning rate 0.01 is 78.46\%.
+
 \end{solution}
 \newpage
 
@@ -153,9 +156,13 @@ of  to test set.
 \begin{solution}
 The first layer weight immediately after initialization:\\
 \includegraphics[width=\textwidth]{3_1_3_1.png}\\
+Zooming in:\\
+\includegraphics[width=\textwidth]{3_1_3_211.png}\\
 \newpage
 The first layer weight after 30 epochs:\\
-\includegraphics[width=\textwidth]{3_1_3_2.png}\\
+\includegraphics[width=\textwidth]{3_1_3_21.png}\\
+Zooming in:\\
+\includegraphics[width=\textwidth]{3_1_3_111.png}\\
 As we can see, the weight after initialization doesn't appear to be having any structures, which makes sense
 because we randomly initialize the weight. After 30 epochs of training, we can see that the weight at each node
 appears to have some structures, such as edge detector, blob detector, or laplacian function. This shows that
@@ -169,6 +176,11 @@ the weights.
 \end{problem}
 
 \begin{solution}
+The confusion matrix is shown below:\\
+\includegraphics[width=\textwidth]{3_1_4_1.png}\\
+As shown, $I$ and $J$ are easily confused because their structure is similar. Other comfusing cases are $F$ and $P$,
+$D$ and $O$, $B$ and $E$, which are casese where the structures are also similar, and therefore the network gets 
+confused about them.
 \end{solution}
 \newpage
 
