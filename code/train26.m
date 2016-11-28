@@ -52,4 +52,4 @@ hold on;
 plot(1:30,plt_valid_loss,'LineWidth',1.5);
 plot(1:30,plt_test_loss,'LineWidth',1.5);
 
-save('nist26_model_001.mat', 'W', 'b')
+save('nist26_model_01.mat', 'W', 'b')
