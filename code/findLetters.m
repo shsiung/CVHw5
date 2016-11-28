@@ -18,8 +18,8 @@ erode_mask = strel('disk',8);
 bw = imerode(bw,erode_mask);
 bw = bwareaopen(bw,20);
 if (PLOT)
-    imshow(bw.*255);
-    %imshow(im);
+    %imshow(bw.*255);
+    imshow(im);
     hold on;
 end
 %% Detect letters
