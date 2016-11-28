@@ -1,4 +1,4 @@
-num_epoch = 20;
+num_epoch = 5;
 classes = 36;
 layers = [32*32, 800, classes];
 learning_rate = 0.01;
@@ -57,4 +57,4 @@ plot(1:num_epoch,plt_valid_loss,'LineWidth',1.5);
 
 W = W_new;
 b = b_new;
-save('nist36_model_2.mat', 'W', 'b')
+save('nist36_model_3.mat', 'W', 'b')
