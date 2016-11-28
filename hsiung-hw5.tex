@@ -143,8 +143,14 @@ learning rate, the faster the training goes, and vice versa. However in my imple
 that it overfits the training data. We can tell from the increase in loss of validation data after epoch 12 or so, 
 and the 100\% accuracy of training data. Using the parameters of learning rate 0.01, we achieve the accuracy
 of  to test set. 
-
+\newpage
 The accuracy from learning rate 0.01 is 82.31\%, and the accuracy from learning rate 0.01 is 78.46\%.
+The results are also shown in below graphs along with train and validation dataset:\\
+0.01:\\
+\includegraphics[width=\textwidth]{3_1_2_11.png}\\
+0.001:\\
+\includegraphics[width=\textwidth]{3_2_1_11.png}
+
 
 \end{solution}
 \newpage
@@ -154,6 +160,10 @@ The accuracy from learning rate 0.01 is 82.31\%, and the accuracy from learning 
 \end{problem}
 
 \begin{solution}
+Accuracy and loss of learning rate 0.01:\\
+\includegraphics[width=0.8\textwidth]{3_1_2_12.png}\\
+Accuracy and loss of learning rate 0.001:\\
+\includegraphics[width=0.8\textwidth]{3_1_2_13.png}\\
 The first layer weight immediately after initialization:\\
 \includegraphics[width=\textwidth]{3_1_3_1.png}\\
 Zooming in:\\
@@ -201,11 +211,17 @@ Loss and accuracy after 10 epochs:\\
 \end{problem}
 
 \begin{solution}
+Test results are shown below:\\
+\includegraphics[width=\textwidth]{3_2_2_111.png}\\
 The first layer weight immediately after initialization:\\
 \includegraphics[width=\textwidth]{3_2_2_1.png}\\
+Zooming in:\\
+\includegraphics[width=\textwidth]{3_2_2_11.png}\\
 \newpage
 The first layer weight after 5 epochs:\\
 \includegraphics[width=\textwidth]{3_2_2_2.png}\\
+Zooming in:\\
+\includegraphics[width=\textwidth]{3_2_2_12.png}\\
 We can see that both weights show structures, but after the training, there are less "noise" in the 
 sense that the strutures become much more apparent. This is because after training, the 
 network has enhanced those pre-trained structures.
@@ -217,6 +233,9 @@ network has enhanced those pre-trained structures.
 \end{problem}
 
 \begin{solution}
+\includegraphics[width=\textwidth]{3_2_3_1.png}
+The confusion matrix shows that $0$ and $O$ are easily confused, also $5$ and $S$, $V$ and $Y$. These
+characters have similar structures as well.
 \end{solution}
 \newpage
 
@@ -227,9 +246,7 @@ network has enhanced those pre-trained structures.
 \begin{solution}
 The algorithm assumes that each letter is spatially apart, and therefore each letter can
 be extracted by itself. It also assumes that the letter has a significant difference in intensity
-than the background, so the algorithm can tell the letters from the background using a simple 
-threshold value method. Lastly, the algorithm assumes that each line of text is close to horizontal, 
-so it can tell which word is on which line. 
+than the background, with background being clear without noise, so the algorithm can tell the letters from the background using a simple threshold value method. Lastly, the algorithm might assume that each line of text is close to horizontal, so solely using the y-position can it tell the line differences.
 \end{solution}
 \newpage
 
@@ -239,10 +256,10 @@ so it can tell which word is on which line.
 
 \begin{solution}
 The results are shown below, which each color represents different line:\\
-\includegraphics[width=\textwidth]{4_3_1.png}\\
-\includegraphics[width=\textwidth]{4_3_2.png}\\
-\includegraphics[width=\textwidth]{4_3_3.png}\\
 \includegraphics[width=\textwidth]{4_3_4.png}\\
+\includegraphics[width=\textwidth]{4_3_3.png}\\
+\includegraphics[width=\textwidth]{4_3_2.png}\\
+\includegraphics[width=\textwidth]{4_3_1.png}\\
 \end{solution}
 \newpage
 
@@ -251,7 +268,17 @@ The results are shown below, which each color represents different line:\\
 \end{problem}
 
 \begin{solution}
-haha
+The below results are corresponding to the image sequence in the previous questions:\\
+\includegraphics[width=\textwidth]{4_3_4.png}\\
+\includegraphics[width=\textwidth]{1.png}\\
+\includegraphics[width=\textwidth]{4_3_3.png}\\
+\includegraphics[width=\textwidth]{2.png}\\
+\includegraphics[width=\textwidth]{4_3_2.png}\\
+\includegraphics[width=\textwidth]{3.png}\\
+\includegraphics[width=\textwidth]{4_3_1.png}\\
+\includegraphics[width=\textwidth]{4.png}\\
+As we can see that there are a lot of similar character getting mixed up, such as $0$ and $O$, $I$ and $J$...etc. There
+is also problems with 
 \end{solution}
 \newpage
 

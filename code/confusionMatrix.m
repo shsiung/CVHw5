@@ -4,7 +4,7 @@ classes = 26;
 layers = [32*32, 400, classes];
 
 load('../data/nist26_test.mat', 'test_data', 'test_labels')
-load('nist26_model_2.mat','W','b');
+load('nist26_model_01.mat','W','b');
 
 test_data = normalize(test_data);
 [outputs] = Classify(W, b, test_data);
