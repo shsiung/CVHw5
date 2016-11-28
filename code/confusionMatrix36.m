@@ -3,7 +3,7 @@ classes = 36;
 layers = [32*32, 800, classes];
 
 load('../data/nist36_test.mat', 'test_data', 'test_labels')
-load('nist36_model.mat','W','b');
+load('nist36_model_3.mat','W','b');
 
 [outputs] = Classify(W, b, test_data);
 
